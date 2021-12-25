@@ -41,10 +41,10 @@ def lambda_handler(event, context):
         content=response['Body'].read()
         with gzip.GzipFile(fileobj=io.BytesIO(content), mode='rb') as f:
             data = json.load(f)
-            print(data)
+            #print(data)
             output_dict=[x for x in data['Records'] if not filter_read_events(x['eventName']) ]
-            print(output_dict)
-            print(len(data['Records']),len(output_dict))
+            #print(output_dict)
+            #print(len(data['Records']),len(output_dict))
             if (len(output_dict)>0):
                 for i in output_dict:
                     send_sns_mail(i)
